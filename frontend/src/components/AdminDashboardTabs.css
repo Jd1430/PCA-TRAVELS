@@ -1,0 +1,58 @@
+.admin-dashboard-tabs {
+  margin: 2rem auto;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.tab-header {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.tab-header button {
+  background: #ffd6d6;
+  color: #ff5e5b;
+  border: none;
+  border-radius: 10px 10px 0 0;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.tab-header button.active {
+  background: #ff5e5b;
+  color: #fff;
+}
+.tab-content {
+  background: #fff;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 24px 18px;
+  min-height: 200px;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .tab-header {
+    gap: 6px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    margin-bottom: 14px;
+  }
+  .tab-header button {
+    padding: 10px 16px;
+    font-size: 0.98rem;
+    border-radius: 7px 7px 0 0;
+    min-width: 120px;
+    white-space: nowrap;
+  }
+  .tab-content {
+    padding: 12px 2vw;
+    min-height: 120px;
+  }
+} 

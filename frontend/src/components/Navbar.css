@@ -1,0 +1,88 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ff5e5b;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.navbar__logo a {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.navbar__links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.navbar__links a:hover {
+  color: #ffd6d6;
+}
+
+.navbar__logout {
+  background: #fff;
+  color: #ff5e5b;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.navbar__hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar__links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 1.5rem 0;
+    align-items: flex-start;
+  }
+  .navbar__links.open {
+    display: flex;
+  }
+  .navbar__links a {
+    color: #ff5e5b;
+    padding: 1rem 2rem;
+    width: 100%;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #f3bcbc;
+  }
+  .navbar__links a:last-child {
+    border-bottom: none;
+  }
+  .navbar__hamburger {
+    display: block;
+    cursor: pointer;
+    z-index: 200;
+  }
+  .navbar__backdrop {
+    background: rgba(0,0,0,0.15);
+    z-index: 98;
+  }
+} 
