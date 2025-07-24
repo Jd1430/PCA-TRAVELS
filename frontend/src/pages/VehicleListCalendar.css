@@ -1,0 +1,17 @@
+.booked-date {
+  background: #ffd6d6 !important;
+  color: #c0392b !important;
+  border-radius: 50% !important;
+}
+
+.pending-date {
+  background: #fff9cc !important;
+  color: #b59b00 !important;
+  border-radius: 50% !important;
+}
+
+.available-date {
+  background: #b6f5c6 !important;
+  color: #222 !important;
+  border-radius: 50% !important;
+} 

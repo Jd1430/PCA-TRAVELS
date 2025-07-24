@@ -1,0 +1,176 @@
+import React, { useState } from 'react';
+import { resetPassword } from '../api/auth';
+import { useNavigate, Link } from 'react-router-dom';
+
+const ResetPasswordPage = () => {
+  const [form, setForm] = useState({ email: '', token: '', new_password: '' });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    
+    try {
+      await resetPassword(form);
+      setSuccess(true);
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (err) {
+      console.error('Reset password error:', err);
+      let errorMessage = 'Password reset failed';
+      
+      if (err.response) {
+        errorMessage = err.response.data?.message || `Server error: ${err.response.status}`;
+      } else if (err.request) {
+        errorMessage = 'Cannot connect to server. Please check if the backend is running.';
+      } else {
+        errorMessage = err.message || 'An unexpected error occurred';
+      }
+      
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (success) {
+    return (
+      <div style={{ 
+        maxWidth: '400px', 
+        margin: '50px auto', 
+        padding: '20px',
+        textAlign: 'center'
+      }}>
+        <div style={{ 
+          padding: '20px', 
+          backgroundColor: '#d4edda', 
+          color: '#155724', 
+          borderRadius: '4px',
+          border: '1px solid #c3e6cb',
+          marginBottom: '20px'
+        }}>
+          <h3 style={{ margin: '0 0 10px 0', color: '#155724' }}>✅ Success!</h3>
+          <p style={{ margin: 0 }}>Your password has been reset successfully.</p>
+          <p style={{ margin: '10px 0 0 0', fontSize: '14px' }}>Redirecting to login page...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Reset Password</h2>
+      
+      <div style={{ 
+        backgroundColor: '#e7f3ff', 
+        padding: '15px', 
+        borderRadius: '4px',
+        border: '1px solid #b3d9ff',
+        marginBottom: '25px'
+      }}>
+        <p style={{ 
+          margin: 0, 
+          color: '#0056b3', 
+          fontSize: '14px',
+          lineHeight: '1.4'
+        }}>
+          <strong>Instructions:</strong> Enter your email address, the OTP code sent to your email, and your new password.
+        </p>
+      </div>
+      
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '15px' }}>
+          <input 
+            type="email"
+            placeholder="Email Address" 
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            style={{ width: '100%', padding: '10px', fontSize: '16px' }}
+            required
+          />
+        </div>
+        
+        <div style={{ marginBottom: '15px' }}>
+          <input 
+            type="text"
+            placeholder="OTP Code (6 digits)" 
+            value={form.token}
+            onChange={(e) => setForm({ ...form, token: e.target.value })}
+            style={{ width: '100%', padding: '10px', fontSize: '16px' }}
+            maxLength="6"
+            required
+          />
+        </div>
+        
+        <div style={{ marginBottom: '20px' }}>
+          <input 
+            type="password" 
+            placeholder="New Password" 
+            value={form.new_password}
+            onChange={(e) => setForm({ ...form, new_password: e.target.value })}
+            style={{ width: '100%', padding: '10px', fontSize: '16px' }}
+            required
+          />
+        </div>
+        
+        <button 
+          type="submit" 
+          disabled={loading}
+          style={{ 
+            width: '100%', 
+            padding: '12px', 
+            fontSize: '16px', 
+            backgroundColor: loading ? '#ccc' : '#28a745',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            marginBottom: '15px'
+          }}
+        >
+          {loading ? 'Resetting Password...' : 'Reset Password'}
+        </button>
+      </form>
+      
+      {error && (
+        <div style={{ 
+          marginBottom: '15px', 
+          padding: '10px', 
+          backgroundColor: '#f8d7da', 
+          color: '#721c24', 
+          borderRadius: '4px',
+          border: '1px solid #f5c6cb'
+        }}>
+          {error}
+        </div>
+      )}
+      
+      <div style={{ textAlign: 'center', color: '#666', marginBottom: '10px' }}>
+        Remember your password?{' '}
+        <Link to="/login" style={{ color: '#007bff', textDecoration: 'none' }}>
+          Login here
+        </Link>
+      </div>
+      
+      <div style={{ textAlign: 'center', color: '#666', marginBottom: '10px' }}>
+        Need to request a new OTP?{' '}
+        <Link to="/forgot-password" style={{ color: '#007bff', textDecoration: 'none' }}>
+          Forgot Password
+        </Link>
+      </div>
+      
+      <div style={{ textAlign: 'center', marginTop: '15px' }}>
+        <Link to="/" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>
+          ← Back to Home
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default ResetPasswordPage;
