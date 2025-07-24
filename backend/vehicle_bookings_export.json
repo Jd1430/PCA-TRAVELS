@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "vehicle_id": 1,
+    "date": "2024-08-01",
+    "status": "approved",
+    "from_place": "City A",
+    "to_place": "City B",
+    "travel_details": "Business trip",
+    "created_at": "2025-07-23T15:17:25.138179"
+  },
+  {
+    "id": 2,
+    "user_id": 2,
+    "vehicle_id": 2,
+    "date": "2024-08-05",
+    "status": "pending",
+    "from_place": "City C",
+    "to_place": "City D",
+    "travel_details": "Family vacation",
+    "created_at": "2025-07-23T15:17:25.138179"
+  },
+  {
+    "id": 3,
+    "user_id": 1,
+    "vehicle_id": 3,
+    "date": "2024-08-10",
+    "status": "cancelled",
+    "from_place": "City E",
+    "to_place": "City F",
+    "travel_details": "Airport transfer",
+    "created_at": "2025-07-23T15:17:25.138179"
+  }
+]
